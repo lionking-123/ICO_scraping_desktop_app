@@ -1261,6 +1261,7 @@ class Ui_MainWindow(object):
 "")
         self.attach_btn3 = QPushButton(self.groupBox1)
         self.attach_btn3.setObjectName(u"attach_btn3")
+        self.attach_btn3.setEnabled(True)
         self.attach_btn3.setGeometry(QRect(210, 100, 100, 24))
         self.attach_btn3.setFont(font1)
         self.attach_btn3.setStyleSheet(u"QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}\n"

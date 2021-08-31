@@ -1341,6 +1341,9 @@ QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
      </property>
     </widget>
     <widget class="QPushButton" name="attach_btn3">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>210</x>
