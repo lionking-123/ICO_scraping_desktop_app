@@ -1,4 +1,4 @@
-# Result of Card Reader desktop app
+# Result of ICO, IDO, IEO, Coin Scraping_Desktop_APP
 <a target = "_blank" href = "https://file.io/l4ja3V8xiEJy"><img src="https://file.io/l4ja3V8xiEJy"/></a>
 
 
@@ -8,7 +8,6 @@
 2. Install following python packages.
     - pyqt5
     - selenium
-    - threading
     - random
 
         You can install above packages using pip.

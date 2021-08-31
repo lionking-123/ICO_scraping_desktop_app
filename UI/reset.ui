@@ -1198,71 +1198,22 @@ ColorButton::disabled {
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="start_btn">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+   <widget class="QGroupBox" name="groupBox1">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>354</y>
-      <width>150</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{background-color:rgba(255,0,0,220);color:white;border:0px;}
-QPushButton:hover{background-color:rgba(255,0,0,255);color:white;}
-QPushButton:pressed{background-color:rgba(255,0,0,235);}
-QPushButton:disabled{background-color:rgba(39, 39, 39, 220); }</string>
-    </property>
-    <property name="text">
-     <string>INTERCEPT NETWORK</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="attach_btn">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>354</y>
-      <width>150</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
-QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
-QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
-    </property>
-    <property name="text">
-     <string>SHOW DATA</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>40</y>
+      <x>40</x>
+      <y>50</y>
       <width>330</width>
-      <height>270</height>
+      <height>420</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="title">
-     <string>SELECT OPTIONS</string>
+     <string>Website URLs</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1273,332 +1224,570 @@ QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
     <property name="checkable">
      <bool>false</bool>
     </property>
-    <widget class="QCheckBox" name="visa">
+    <widget class="QLabel" name="label1">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>47</y>
-       <width>121</width>
-       <height>21</height>
+       <x>20</x>
+       <y>44</y>
+       <width>140</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>VISA</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="master">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>85</y>
-       <width>121</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>MASTERCARD</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="discover">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>161</y>
-       <width>121</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>DISCOVER</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="amex">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>123</y>
-       <width>121</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>AMEX</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="all_card">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>195</y>
-       <width>121</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>ALL</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="all_method">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>123</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>ALL</string>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="debit">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>85</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>DEBIT</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="creadit">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>47</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>CREDIT</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="port101">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>237</y>
-       <width>51</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>101</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="port201">
-     <property name="geometry">
-      <rect>
-       <x>88</x>
-       <y>237</y>
-       <width>51</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>201</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="port221">
-     <property name="geometry">
-      <rect>
-       <x>146</x>
-       <y>237</y>
-       <width>51</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>221</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="port121">
-     <property name="geometry">
-      <rect>
-       <x>204</x>
-       <y>237</y>
-       <width>51</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>121</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="all_port">
-     <property name="geometry">
-      <rect>
-       <x>262</x>
-       <y>237</y>
-       <width>51</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>ALL</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>450</y>
-      <width>680</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border:0px;
-background-color:#333333;
-border-radius:3px;</string>
-    </property>
-    <property name="value">
-     <number>40</number>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="net_status">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>364</x>
-      <y>335</y>
-      <width>72</width>
-      <height>72</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{background-color:rgba(255,255,255,0);border:0px; border-radius:36px;}
-QPushButton:hover{background-color:rgba(255,255,255,100);}
-QPushButton:pressed{background-color:rgba(255,255,255,50);}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>72</width>
-      <height>72</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="result_box">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>60</y>
-      <width>330</width>
-      <height>250</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10px;
-padding: 10px;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>420</y>
-      <width>60</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: transparent;
-color : white;
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
 </string>
-    </property>
-    <property name="text">
-     <string>Status : </string>
-    </property>
+     </property>
+     <property name="text">
+      <string>https://icodrops.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn1">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>40</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>74</y>
+       <width>151</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://icomarks.com/icos</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn2">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>70</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>104</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://coincodex.com/sto-list</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn3">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>100</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>134</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://cryptorank.io/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn4">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>130</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>164</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://www.tradingview.com</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn5">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>160</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>194</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://bravenewcoin.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn6">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>190</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>224</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://tradingeconomics.com</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn12">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>370</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label12">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>374</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://airdropalert.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn11">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>340</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label9">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>284</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://airdropalert.com/</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>254</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://data.worldbank.org/</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label11">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>344</y>
+       <width>151</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://cryptoticker.io/en/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn10">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>310</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>314</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://coinmarketcap.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn9">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>280</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn7">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>220</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn8">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>250</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
    </widget>
    <widget class="WindowDragger" name="windowTitlebar" native="true">
     <property name="geometry">
@@ -1679,7 +1868,7 @@ color : white;
         <string notr="true">color:white;</string>
        </property>
        <property name="text">
-        <string>  Card Reader</string>
+        <string>  Scraping Tool  1.0.0</string>
        </property>
       </widget>
      </item>
@@ -1735,61 +1924,550 @@ color : white;
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="status">
+   <widget class="QGroupBox" name="groupBox2">
     <property name="geometry">
      <rect>
-      <x>125</x>
-      <y>420</y>
-      <width>611</width>
-      <height>21</height>
+      <x>430</x>
+      <y>50</y>
+      <width>330</width>
+      <height>420</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
+      <pointsize>9</pointsize>
      </font>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: transparent;
-color : white;
+    <property name="title">
+     <string>Website URLs</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QLabel" name="label13">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>44</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
 </string>
-    </property>
-    <property name="text">
-     <string>NOT CONNECTED!  SELECT INTERCEPT NETWORK.</string>
-    </property>
+     </property>
+     <property name="text">
+      <string>https://airdrops.io/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn13">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>40</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label14">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>74</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://coincodex.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn14">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>70</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label15">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>104</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://cryptorank.io/price/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn15">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>100</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label16">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>134</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://www.coingecko.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn16">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>130</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label17">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>164</y>
+       <width>181</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://www.livecoinwatch.com</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn17">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>160</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label18">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>194</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://coinranking.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn18">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>190</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label19">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>224</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://airdrops.io/airdrop/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn23">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>340</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label21">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>284</y>
+       <width>140</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://airdropalert.com/</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label20">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>254</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://www.airdropbob.com</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label23">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>344</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://coinmarketcap.com/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn22">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>310</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label22">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>314</y>
+       <width>181</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;
+</string>
+     </property>
+     <property name="text">
+      <string>https://www.airdropsmob.com</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn21">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>280</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn19">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>220</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="attach_btn20">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>250</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{background-color:rgba(57,167,23,220);color:white;border:0px;}
+QPushButton:hover{background-color:rgba(57,167,23,255);color:white;}
+QPushButton:pressed{background-color:rgba(57,167,23,235);}</string>
+     </property>
+     <property name="text">
+      <string>Extract</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QLabel" name="net_image">
-    <property name="geometry">
-     <rect>
-      <x>364</x>
-      <y>335</y>
-      <width>72</width>
-      <height>72</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: transparent;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <zorder>back</zorder>
-   <zorder>net_image</zorder>
-   <zorder>start_btn</zorder>
-   <zorder>attach_btn</zorder>
-   <zorder>groupBox</zorder>
-   <zorder>progressBar</zorder>
-   <zorder>net_status</zorder>
-   <zorder>result_box</zorder>
-   <zorder>label</zorder>
-   <zorder>windowTitlebar</zorder>
-   <zorder>status</zorder>
   </widget>
  </widget>
  <customwidgets>
@@ -1801,8 +2479,7 @@ color : white;
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>start_btn</tabstop>
-  <tabstop>attach_btn</tabstop>
+  <tabstop>attach_btn1</tabstop>
  </tabstops>
  <resources/>
  <connections/>
