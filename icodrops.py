@@ -1,4 +1,3 @@
-import re
 import os
 import time
 import pandas as pd
@@ -25,7 +24,11 @@ def icodrops():
     driver.close()
     datas = {}
 
+    count = 1
     for url in urls:
+        if(count > 3):
+            break
+        count = count + 1
         driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
         driver.get(url)
         time.sleep(1)
@@ -73,6 +76,58 @@ def icodrops():
             whitepaper = driver.find_elements_by_css_selector(
                 "div.ico-right-col > a")[1].get_attribute("href")
             data["Whitepaper"] = whitepaper
+        except:
+            pass
+
+        try:
+            links = driver.find_elements_by_css_selector("div.soc_links > a")
+            for link in links:
+                soc_link = link.get_attribute("href")
+                if("facebook" in soc_link):
+                    data["Facebook link"] = soc_link
+                elif("reddit" in soc_link):
+                    data["Reddit link"] = soc_link
+                elif("twitter" in soc_link):
+                    data["Twitter link"] = soc_link
+                elif("t.me" in soc_link):
+                    data["Telegram link"] = soc_link
+                elif("medium" in soc_link):
+                    data["Medium link"] = soc_link
+                elif("discord" in soc_link):
+                    data["Discord link"] = soc_link
+                else:
+                    data["Youtube link"] = soc_link
+        except:
+            pass
+
+        try:
+            token_sale = driver.find_elements_by_css_selector(
+                "div.title-h4 > h4")[0].text
+            token_sale = str(token_sale).replace("TOKEN Sale: ", "")
+            data["Token Sale"] = token_sale
+        except:
+            pass
+
+        try:
+            lis = driver.find_elements_by_css_selector("div.list > div > li")
+            for li in lis:
+                li_text = li.text
+                span_text = li.find_element_by_tag_name("span").text
+                li_text = str(li_text).replace(span_text, "")[1:]
+                span_text = str(span_text).replace(":", "")
+                data[span_text] = li_text
+        except:
+            pass
+
+        try:
+            atags = driver.find_elements_by_css_selector(
+                "div.list-thin > div >li > a")
+            id = 1
+            for atag in atags:
+                add_link = atag.text
+                data["Addional Link{}".format(id)] = str(
+                    add_link + " # " + atag.get_attribute("href"))
+                id = id + 1
         except:
             pass
 
