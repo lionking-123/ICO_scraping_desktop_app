@@ -8,6 +8,8 @@ from icomarks import icomarks
 from coincodex import coincodex
 from cryptorank import cryptorank
 from tradingview import tradingview
+from bravenewcoin import bravenewcoin
+from tradingeconomics import tradingeconomics
 # from analytics import  AnalyticsWidget
 
 import os
@@ -38,6 +40,10 @@ class Worker(QObject):
             cryptorank()
         elif(self.scrap_id == 5):
             tradingview()
+        elif(self.scrap_id == 6):
+            bravenewcoin()
+        elif(self.scrap_id == 7):
+            tradingeconomics()
 
         self.finished.emit()
 
@@ -68,6 +74,136 @@ class MainWindow(QMainWindow, FROM_RESET):
         self.attach_btn3.clicked.connect(self.scrape_coincodex)
         self.attach_btn4.clicked.connect(self.scrape_cryptorank)
         self.attach_btn5.clicked.connect(self.scrape_tradingview)
+        self.attach_btn6.clicked.connect(self.scrape_bravenewcoin)
+        self.attach_btn7.clicked.connect(self.scrape_tradingeconomics)
+
+    def scrape_tradingeconomics(self):
+        self.thread = QThread()
+        self.worker = Worker()
+        self.worker.scrap_id = 7
+        self.worker.moveToThread(self.thread)
+
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+
+        self.thread.start()
+        self.attach_btn1.setEnabled(False)
+        self.attach_btn2.setEnabled(False)
+        self.attach_btn3.setEnabled(False)
+        self.attach_btn4.setEnabled(False)
+        self.attach_btn5.setEnabled(False)
+        self.attach_btn6.setEnabled(False)
+        self.attach_btn7.setEnabled(False)
+        self.attach_btn8.setEnabled(False)
+        self.attach_btn9.setEnabled(False)
+        self.attach_btn10.setEnabled(False)
+        self.attach_btn11.setEnabled(False)
+        self.attach_btn12.setEnabled(False)
+        self.attach_btn13.setEnabled(False)
+        self.attach_btn14.setEnabled(False)
+        self.attach_btn15.setEnabled(False)
+        self.attach_btn16.setEnabled(False)
+        self.attach_btn17.setEnabled(False)
+        self.attach_btn18.setEnabled(False)
+        self.attach_btn19.setEnabled(False)
+        self.attach_btn20.setEnabled(False)
+        self.attach_btn21.setEnabled(False)
+        self.attach_btn22.setEnabled(False)
+        self.attach_btn23.setEnabled(False)
+        self.attach_btn7.setText("Extracting ...")
+
+        self.thread.finished.connect(
+            lambda: (self.attach_btn1.setEnabled(True),
+                     self.attach_btn2.setEnabled(True),
+                     self.attach_btn3.setEnabled(True),
+                     self.attach_btn4.setEnabled(True),
+                     self.attach_btn5.setEnabled(True),
+                     self.attach_btn6.setEnabled(True),
+                     self.attach_btn7.setEnabled(True),
+                     self.attach_btn8.setEnabled(True),
+                     self.attach_btn9.setEnabled(True),
+                     self.attach_btn10.setEnabled(True),
+                     self.attach_btn11.setEnabled(True),
+                     self.attach_btn12.setEnabled(True),
+                     self.attach_btn13.setEnabled(True),
+                     self.attach_btn14.setEnabled(True),
+                     self.attach_btn15.setEnabled(True),
+                     self.attach_btn16.setEnabled(True),
+                     self.attach_btn17.setEnabled(True),
+                     self.attach_btn18.setEnabled(True),
+                     self.attach_btn19.setEnabled(True),
+                     self.attach_btn20.setEnabled(True),
+                     self.attach_btn21.setEnabled(True),
+                     self.attach_btn22.setEnabled(True),
+                     self.attach_btn23.setEnabled(True),
+                     self.attach_btn7.setText("Extract"))
+        )
+
+    def scrape_bravenewcoin(self):
+        self.thread = QThread()
+        self.worker = Worker()
+        self.worker.scrap_id = 6
+        self.worker.moveToThread(self.thread)
+
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+
+        self.thread.start()
+        self.attach_btn1.setEnabled(False)
+        self.attach_btn2.setEnabled(False)
+        self.attach_btn3.setEnabled(False)
+        self.attach_btn4.setEnabled(False)
+        self.attach_btn5.setEnabled(False)
+        self.attach_btn6.setEnabled(False)
+        self.attach_btn7.setEnabled(False)
+        self.attach_btn8.setEnabled(False)
+        self.attach_btn9.setEnabled(False)
+        self.attach_btn10.setEnabled(False)
+        self.attach_btn11.setEnabled(False)
+        self.attach_btn12.setEnabled(False)
+        self.attach_btn13.setEnabled(False)
+        self.attach_btn14.setEnabled(False)
+        self.attach_btn15.setEnabled(False)
+        self.attach_btn16.setEnabled(False)
+        self.attach_btn17.setEnabled(False)
+        self.attach_btn18.setEnabled(False)
+        self.attach_btn19.setEnabled(False)
+        self.attach_btn20.setEnabled(False)
+        self.attach_btn21.setEnabled(False)
+        self.attach_btn22.setEnabled(False)
+        self.attach_btn23.setEnabled(False)
+        self.attach_btn6.setText("Extracting ...")
+
+        self.thread.finished.connect(
+            lambda: (self.attach_btn1.setEnabled(True),
+                     self.attach_btn2.setEnabled(True),
+                     self.attach_btn3.setEnabled(True),
+                     self.attach_btn4.setEnabled(True),
+                     self.attach_btn5.setEnabled(True),
+                     self.attach_btn6.setEnabled(True),
+                     self.attach_btn7.setEnabled(True),
+                     self.attach_btn8.setEnabled(True),
+                     self.attach_btn9.setEnabled(True),
+                     self.attach_btn10.setEnabled(True),
+                     self.attach_btn11.setEnabled(True),
+                     self.attach_btn12.setEnabled(True),
+                     self.attach_btn13.setEnabled(True),
+                     self.attach_btn14.setEnabled(True),
+                     self.attach_btn15.setEnabled(True),
+                     self.attach_btn16.setEnabled(True),
+                     self.attach_btn17.setEnabled(True),
+                     self.attach_btn18.setEnabled(True),
+                     self.attach_btn19.setEnabled(True),
+                     self.attach_btn20.setEnabled(True),
+                     self.attach_btn21.setEnabled(True),
+                     self.attach_btn22.setEnabled(True),
+                     self.attach_btn23.setEnabled(True),
+                     self.attach_btn6.setText("Extract"))
+        )
 
     def scrape_tradingview(self):
         self.thread = QThread()

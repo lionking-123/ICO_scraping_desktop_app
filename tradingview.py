@@ -12,7 +12,7 @@ def tradingview():
     option = webdriver.ChromeOptions()
     driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
     driver.get(src)
-    time.sleep(2)
+    time.sleep(4)
 
     datas = {}
     trs = driver.find_elements_by_css_selector(
