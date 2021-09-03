@@ -23,11 +23,14 @@ def bravenewcoin():
         except:
             break
 
-    datas = {}
-    urls = driver.find_elements_by_css_selector(
-        "div.event-name > a").get_attribute("href")
+    urls = []
+    atags = driver.find_elements_by_css_selector("div.event-name > a")
+    for atag in atags:
+        tmp = atag.get_attribute("href")
+        urls.append(tmp)
 
     driver.close()
+    datas = {}
 
     count = 1
     for url in urls:
