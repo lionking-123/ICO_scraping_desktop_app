@@ -29,34 +29,60 @@ def bravenewcoin():
 
     driver.close()
 
+    count = 1
     for url in urls:
+        if(count > 3):
+            break
+        count = count + 1
+        driver = webdriver.Chrome("./UI/chromedriver", options=option)
+        driver.get(url)
+        time.sleep(1)
         data = {}
-        try:
-            event_date = div.find_element_by_css_selector(
-                "div.event-date > div").text
-            event_date = str(event_date).replace("\n", " ")
-            data["Event Date"] = event_date
-        except:
-            pass
 
         try:
-            event_name = div.find_element_by_css_selector(
-                "div.event-name > a").text
+            event_name = driver.find_element_by_css_selector(
+                "div.event > div > div:nth-child(2) > h1").text
             data["Event Name"] = event_name
+
+            event_date = driver.find_elements_by_css_selector(
+                "div.event.d-none div.event-detail > p")[0].text
+
+            event_date = str(event_date).replace("\n", " ")
+            id = str(event_date).index("-")
+
+            data["Start Date"] = event_date[:id - 1]
+            data["End Date"] = event_date[id + 2:]
+
+            location = driver.find_element_by_css_selector(
+                "div.event.d-none p.location > span").text
+            data["Location"] = location
         except:
             pass
 
         try:
-            event_type = div.find_element_by_css_selector(
-                "div.event-type > span").text
-            data["Event Type"] = event_type
+            website = driver.find_element_by_css_selector(
+                "div.event.d-none a.btn-outline-primary").get_attribute("href")
+            data["Website"] = website
+
+            bTicket = driver.find_element_by_css_selector(
+                "div.event.d-none div.event-action > a").get_attribute("href")
+            data["Buy Ticket"] = bTicket
+
+            tags = driver.find_elements_by_css_selector(
+                "div.event.d-none p.article-tags >a")
+            article_tag = ""
+            for tag in tags:
+                article_tag += (tag.text + ", ")
+            data["Article Tags"] = article_tag[:-2]
         except:
             pass
 
         try:
-            event_location = div.find_element_by_css_selector(
-                "div.event-location").text
-            data["Event Location"] = event_location
+            description = driver.find_elements_by_css_selector(
+                "div.event.d-none > div > div:nth-child(2) > p")[1].text
+            description += ("\n" + driver.find_element_by_css_selector(
+                "div.event.d-none markdown > p").text)
+            data["Description"] = description
         except:
             pass
 
