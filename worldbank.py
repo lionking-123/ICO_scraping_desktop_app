@@ -1,5 +1,4 @@
 import os
-import gc
 import time
 import pandas as pd
 from selenium import webdriver
@@ -7,8 +6,8 @@ from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 
 
-def coincodex():
-    src = 'https://coincodex.com/sto-list/'
+def worldbank():
+    src = 'https://data.worldbank.org/country'
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     driver = webdriver.Chrome("./UI/chromedriver", options=option)
@@ -16,7 +15,7 @@ def coincodex():
     time.sleep(1)
 
     urls = []
-    atags = driver.find_elements_by_css_selector("tr > td:nth-child(1) > a")
+    atags = driver.find_elements_by_css_selector("section > ul > li > a")
     for atag in atags:
         tmp = atag.get_attribute("href")
         if("undefined" not in tmp):
@@ -95,5 +94,3 @@ def coincodex():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/cioncodex.csv")
-
-    gc.collect()

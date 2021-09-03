@@ -1,4 +1,5 @@
 import os
+import gc
 import time
 import pandas as pd
 from selenium import webdriver
@@ -7,10 +8,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def tradingeconomics():
-    path = os.path.dirname(os.path.abspath(__file__))
     src = 'https://tradingeconomics.com/'
     option = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+    # option.add_argument("--headless")
+    driver = webdriver.Chrome("./UI/chromedriver", options=option)
     driver.get(src)
     time.sleep(3)
 
@@ -62,3 +63,5 @@ def tradingeconomics():
     df.to_csv("./results/tradingeconomics.csv")
 
     driver.close()
+
+    gc.collect()

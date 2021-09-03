@@ -1,4 +1,5 @@
 import os
+import gc
 import time
 import pandas as pd
 from selenium import webdriver
@@ -7,10 +8,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def icomarks():
-    path = os.path.dirname(os.path.abspath(__file__))
     src = 'https://icomarks.com/icos'
     option = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+    # option.add_argument("--headless")
+    driver = webdriver.Chrome("./UI/chromedriver", options=option)
     driver.get(src)
     time.sleep(1)
 
@@ -29,49 +30,18 @@ def icomarks():
         if(count > 3):
             break
         count = count + 1
-        driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+        driver = webdriver.Chrome("./UI/chromedriver", options=option)
         driver.get(url)
         time.sleep(1)
         data = {}
         try:
             ico_name = driver.find_element_by_css_selector(
                 "h1[itemprop = 'name']").text
-            ico_active = driver.find_element_by_css_selector(
-                "div.ico-active").text
             ico_description = driver.find_element_by_css_selector(
                 "div.company-description").text
-            ico_comment_views = driver.find_element_by_css_selector(
-                "div.comment-views").text
-            ico_active = str(ico_active).replace(ico_comment_views, "")
 
             data["ICO Name"] = ico_name
-            data["ICO Active"] = ico_active
-            data["ICO Comment Views"] = ico_comment_views
             data["ICO Description"] = ico_description
-        except:
-            pass
-
-        try:
-            total_score = driver.find_element_by_css_selector(
-                "div.ico-rating-overall").text
-            ico_profile = str.split(str(driver.find_elements_by_css_selector(
-                "div.ico-rating__circle")[0].text), "\n")[0]
-            ico_profile = ico_profile + (str(driver.find_elements_by_css_selector(
-                "div.ico-rating__title > p")[0].text))
-            social_activity = str.split(str(driver.find_elements_by_css_selector(
-                "div.ico-rating__circle")[1].text), "\n")[0]
-            social_activity = social_activity + (str(driver.find_elements_by_css_selector(
-                "div.ico-rating__title > p")[1].text))
-            team_proof = str.split(str(driver.find_elements_by_css_selector(
-                "div.ico-rating__circle")[2].text), "\n")[0]
-            team_proof = team_proof + (str(driver.find_elements_by_css_selector(
-                "div.ico-rating__title > p")[2].text))
-
-            data["Total Score"] = total_score
-            data["ICO Profile"] = ico_profile
-            data["Social Activity"] = social_activity
-            data["Team Proof"] = team_proof
-
         except:
             pass
 
@@ -101,10 +71,19 @@ def icomarks():
                 elif(("Website" in span_text) or ("White paper" in span_text) or ("MVP" in span_text)):
                     link = div.find_element_by_tag_name(
                         "a").get_attribute("href")
+                    if("Website" in span_text):
+                        link = str(link).replace("?utm_source=icomarks", "")
                     data[span_text] = link
                 else:
                     li_text = str(div.text).replace(span_text, "")[2:]
-                    data[span_text] = li_text
+                    if(("ICO Time" in span_text) or ("Pre-sale Time" in span_text)):
+                        id = str(li_text).index("-")
+                        data["Start Date"] = li_text[:id - 1]
+                        data["End Date"] = li_text[id + 2:]
+                    elif(("ICO Price" in span_text) or ("Soft cap" in span_text)):
+                        data[span_text] = li_text[:-4]
+                    else:
+                        data[span_text] = li_text
         except:
             pass
 
@@ -114,3 +93,5 @@ def icomarks():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/icomarks.csv")
+
+    gc.collect()

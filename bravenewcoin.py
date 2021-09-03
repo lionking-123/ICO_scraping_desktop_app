@@ -1,4 +1,5 @@
 import os
+import gc
 import time
 import pandas as pd
 from selenium import webdriver
@@ -7,10 +8,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def bravenewcoin():
-    path = os.path.dirname(os.path.abspath(__file__))
     src = 'https://bravenewcoin.com/events'
     option = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+    # option.add_argument("--headless")
+    driver = webdriver.Chrome("./UI/chromedriver", options=option)
     driver.get(src)
     time.sleep(3)
 
@@ -23,9 +24,12 @@ def bravenewcoin():
             break
 
     datas = {}
-    divs = driver.find_elements_by_css_selector("div.event-item.col-12")
+    urls = driver.find_elements_by_css_selector(
+        "div.event-name > a").get_attribute("href")
 
-    for div in divs:
+    driver.close()
+
+    for url in urls:
         data = {}
         try:
             event_date = div.find_element_by_css_selector(
@@ -58,7 +62,9 @@ def bravenewcoin():
 
         datas[event_name] = data
 
+        driver.close()
+
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/bravenewcoin.csv")
 
-    driver.close()
+    gc.collect()

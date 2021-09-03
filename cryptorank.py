@@ -1,4 +1,5 @@
 import os
+import gc
 import time
 import pandas as pd
 from selenium import webdriver
@@ -7,10 +8,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def cryptorank():
-    path = os.path.dirname(os.path.abspath(__file__))
     src = 'https://cryptorank.io/upcoming-ico'
     option = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+    # option.add_argument("--headless")
+    driver = webdriver.Chrome("./UI/chromedriver", options=option)
     driver.get(src)
     time.sleep(1)
 
@@ -30,7 +31,7 @@ def cryptorank():
         if(count > 3):
             break
         count = count + 1
-        driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+        driver = webdriver.Chrome("./UI/chromedriver", options=option)
         driver.get(url)
         time.sleep(1)
         data = {}
@@ -54,10 +55,8 @@ def cryptorank():
         try:
             data["TokenSale"] = driver.find_elements_by_css_selector(
                 "div[class*='IcoInfoValue']")[0].text
-            data["FundraisingGoal"] = driver.find_elements_by_css_selector(
+            data["Goal"] = driver.find_elements_by_css_selector(
                 "div[class*='IcoInfoValue']")[1].text
-            data["Interest Rate"] = driver.find_elements_by_css_selector(
-                "div[class*='IcoInfoValue']")[2].text
         except:
             pass
 
@@ -78,6 +77,9 @@ def cryptorank():
             for link in links:
                 soc_link = link.get_attribute("href")
                 soc_title = link.get_attribute("title")
+                if(soc_title == "Website"):
+                    soc_link = str(soc_link).replace(
+                        "/?utm_source=cryptorank", "")
 
                 data[soc_title] = soc_link
         except:
@@ -88,24 +90,26 @@ def cryptorank():
                 "div[class*='TokenEconomicsBlock'] > div[class*='columns__Column'] > div > div")
             data["Total Raised"] = divs[0].text
 
-            initial_values = ""
             for i in range(1, len(divs)):
-                initial_values += (divs[i].text + "\n")
+                cont_text = divs[i].text
+                id = str(cont_text).index(":")
+                if("Market" in cont_text):
+                    data["Market cap"] = cont_text[id + 2:]
+                elif("FDMC" in cont_text):
+                    data["FDMC"] = cont_text[id + 2:]
+                else:
+                    data["Circulating Supply"] = cont_text[id + 2:]
 
-            data["Initial Values"] = initial_values[:-1]
         except:
             pass
 
         try:
             divs = driver.find_elements_by_css_selector(
                 "div[class*='SupplyRow']")
-            token_alloc = ""
             for div in divs:
                 title = div.find_elements_by_tag_name("div")[0].text
                 value = div.find_elements_by_tag_name("div")[1].text
-                token_alloc += (title + value + "\n")
-
-            data["Token Allocation"] = token_alloc[:-1]
+                data[title] = value
         except:
             pass
 
@@ -115,3 +119,5 @@ def cryptorank():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/cryptorank.csv")
+
+    gc.collect()

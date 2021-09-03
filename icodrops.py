@@ -1,4 +1,5 @@
 import os
+import gc
 import time
 import pandas as pd
 from selenium import webdriver
@@ -7,10 +8,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def icodrops():
-    path = os.path.dirname(os.path.abspath(__file__))
     src = 'https://icodrops.com/'
     option = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+    # option.add_argument("--headless")
+    driver = webdriver.Chrome("./UI/chromedriver", options=option)
     driver.get(src)
     time.sleep(1)
 
@@ -29,7 +30,7 @@ def icodrops():
         if(count > 3):
             break
         count = count + 1
-        driver = webdriver.Chrome(path+"/UI/chromedriver", options=option)
+        driver = webdriver.Chrome("./UI/chromedriver", options=option)
         driver.get(url)
         time.sleep(1)
         data = {}
@@ -38,6 +39,7 @@ def icodrops():
                 "div.ico-main-info > h3").text
             ico_category = str.split(str(driver.find_element_by_css_selector(
                 "span.ico-category-name").text), "\n")[0]
+            ico_category = ico_category[1:-1]
             ico_description = driver.find_element_by_css_selector(
                 "div.ico-description").text
             ico_important = driver.find_element_by_css_selector(
@@ -54,14 +56,16 @@ def icodrops():
         try:
             money_goal = driver.find_element_by_css_selector(
                 "div.fund-goal > div.money-goal").text
-            data["Money Goal"] = money_goal
+            data["Money Goal"] = money_goal[1:]
         except:
             pass
 
         try:
             goal = driver.find_element_by_css_selector(
                 "div.fund-goal > div.goal").text
-            data["Goal"] = goal
+            goal = str(goal).replace("OF\n$", "")
+            id = str(goal).index("(")
+            data["Goal"] = goal[:id]
         except:
             pass
 
@@ -104,7 +108,9 @@ def icodrops():
             token_sale = driver.find_elements_by_css_selector(
                 "div.title-h4 > h4")[0].text
             token_sale = str(token_sale).replace("TOKEN Sale: ", "")
-            data["Token Sale"] = token_sale
+            id = str(token_sale).index("-")
+            data["Start_date"] = token_sale[:id-1]
+            data["End_date"] = token_sale[id+2:]
         except:
             pass
 
@@ -115,7 +121,11 @@ def icodrops():
                 span_text = li.find_element_by_tag_name("span").text
                 li_text = str(li_text).replace(span_text, "")[1:]
                 span_text = str(span_text).replace(":", "")
-                data[span_text] = li_text
+                if(span_text == "ICO Token Price"):
+                    id = str(li_text).index("=")
+                    data["ICO Price"] = li_text[id + 2:-4]
+                else:
+                    data[span_text] = li_text
         except:
             pass
 
@@ -137,3 +147,5 @@ def icodrops():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/icodrops.csv")
+
+    gc.collect()
