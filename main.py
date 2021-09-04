@@ -13,6 +13,7 @@ from tradingeconomics import tradingeconomics
 from worldbank import worldbank
 from coinmarketcap import coinmarketcap
 from airdrops import airdrops
+from cryptoticker import cryptoticker
 from airdropalert import airdropalert
 # from analytics import  AnalyticsWidget
 
@@ -54,6 +55,8 @@ class Worker(QObject):
             airdrops()
         elif(self.scrap_id == 10):
             coinmarketcap()
+        elif(self.scrap_id == 11):
+            cryptoticker()
         elif(self.scrap_id == 12):
             airdropalert()
 
@@ -91,7 +94,50 @@ class MainWindow(QMainWindow, FROM_RESET):
         self.attach_btn8.clicked.connect(self.scrape_worldbank)
         self.attach_btn9.clicked.connect(self.scrape_airdrops)
         self.attach_btn10.clicked.connect(self.scrape_coinmarketcap)
+        self.attach_btn11.clicked.connect(self.scrape_cryptoticker)
         self.attach_btn12.clicked.connect(self.scrape_airdropalert)
+
+    def scrape_cryptoticker(self):
+        self.thread = QThread()
+        self.worker = Worker()
+        self.worker.scrap_id = 11
+        self.worker.moveToThread(self.thread)
+
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+
+        self.thread.start()
+        self.attach_btn1.setEnabled(False)
+        self.attach_btn2.setEnabled(False)
+        self.attach_btn3.setEnabled(False)
+        self.attach_btn4.setEnabled(False)
+        self.attach_btn5.setEnabled(False)
+        self.attach_btn6.setEnabled(False)
+        self.attach_btn7.setEnabled(False)
+        self.attach_btn8.setEnabled(False)
+        self.attach_btn9.setEnabled(False)
+        self.attach_btn10.setEnabled(False)
+        self.attach_btn11.setEnabled(False)
+        self.attach_btn12.setEnabled(False)
+        self.attach_btn11.setText("Extracting ...")
+
+        self.thread.finished.connect(
+            lambda: (self.attach_btn1.setEnabled(True),
+                     self.attach_btn2.setEnabled(True),
+                     self.attach_btn3.setEnabled(True),
+                     self.attach_btn4.setEnabled(True),
+                     self.attach_btn5.setEnabled(True),
+                     self.attach_btn6.setEnabled(True),
+                     self.attach_btn7.setEnabled(True),
+                     self.attach_btn8.setEnabled(True),
+                     self.attach_btn9.setEnabled(True),
+                     self.attach_btn10.setEnabled(True),
+                     self.attach_btn11.setEnabled(True),
+                     self.attach_btn12.setEnabled(True),
+                     self.attach_btn11.setText("Extract"))
+        )
 
     def scrape_airdropalert(self):
         self.thread = QThread()
