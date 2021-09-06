@@ -2,8 +2,9 @@ import os
 import time
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def airdropalert():
@@ -11,18 +12,21 @@ def airdropalert():
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     driver = webdriver.Chrome("./UI/chromedriver", options=option)
+    wait = WebDriverWait(driver, 5)
 
     urls = []
     for i in range(1, 15):
         driver.get(src + str(i))
-        time.sleep(1)
+        wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, 'a.card-link-overlay')))
+        driver.execute_script("window.stop();")
 
         atags = driver.find_elements_by_css_selector("a.card-link-overlay")
 
         for atag in atags:
             urls.append(atag.get_attribute("href"))
 
-    driver.close()
+    driver.quit()
 
     datas = {}
 
@@ -35,7 +39,10 @@ def airdropalert():
 
             driver = webdriver.Chrome("./UI/chromedriver", options=option)
             driver.get(url)
-            time.sleep(1)
+            wait.until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'h1.airdrop__title')))
+            driver.execute_script("window.stop();")
+
             data = {}
 
             try:
@@ -113,7 +120,7 @@ def airdropalert():
 
             datas[name] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

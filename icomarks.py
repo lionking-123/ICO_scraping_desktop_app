@@ -22,7 +22,7 @@ def icomarks():
         if("undefined" not in tmp):
             urls.append(tmp)
 
-    driver.close()
+    driver.quit()
     datas = {}
 
     count = 1
@@ -91,7 +91,7 @@ def icomarks():
 
             datas[ico_name] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

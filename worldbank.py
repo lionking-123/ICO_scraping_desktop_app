@@ -4,8 +4,6 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.common.exceptions import NoSuchElementException
 
 
 def worldbank():
@@ -23,7 +21,7 @@ def worldbank():
         if("undefined" not in tmp):
             urls.append(tmp)
 
-    driver.close()
+    driver.quit()
     datas = {}
 
     count = 1
@@ -60,7 +58,7 @@ def worldbank():
 
             datas[location] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

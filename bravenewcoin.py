@@ -29,7 +29,7 @@ def bravenewcoin():
         tmp = atag.get_attribute("href")
         urls.append(tmp)
 
-    driver.close()
+    driver.quit()
     datas = {}
 
     count = 1
@@ -92,7 +92,7 @@ def bravenewcoin():
 
             datas[event_name] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

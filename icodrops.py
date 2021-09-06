@@ -22,7 +22,7 @@ def icodrops():
         if("undefined" not in tmp):
             urls.append(tmp)
 
-    driver.close()
+    driver.quit()
     datas = {}
 
     count = 1
@@ -146,7 +146,7 @@ def icodrops():
 
             datas[ico_name] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

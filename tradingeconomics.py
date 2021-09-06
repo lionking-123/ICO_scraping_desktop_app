@@ -62,6 +62,6 @@ def tradingeconomics():
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/tradingeconomics.csv")
 
-    driver.close()
+    driver.quit()
 
     gc.collect()

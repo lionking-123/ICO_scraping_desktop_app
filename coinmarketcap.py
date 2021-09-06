@@ -24,7 +24,7 @@ def coinmarketcap():
         for atag in atags:
             urls.append(atag.get_attribute("href"))
 
-    driver.close()
+    driver.quit()
 
     datas = {}
 
@@ -108,7 +108,7 @@ def coinmarketcap():
 
             datas[name] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

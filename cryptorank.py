@@ -23,7 +23,7 @@ def cryptorank():
         if("undefined" not in tmp):
             urls.append(tmp)
 
-    driver.close()
+    driver.quit()
     datas = {}
 
     count = 1
@@ -116,7 +116,7 @@ def cryptorank():
 
             datas[ico_name] = data
 
-            driver.close()
+            driver.quit()
         except:
             pass
 

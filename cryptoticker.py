@@ -89,7 +89,7 @@ def cryptoticker():
 
         datas[name4[3:]] = data
 
-        driver.close()
+        driver.quit()
 
         df = pd.DataFrame(data=datas).T
         df.to_csv("./results/crytoticker.csv")
