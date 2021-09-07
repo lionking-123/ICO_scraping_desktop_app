@@ -31,7 +31,7 @@ def cryptoticker():
 
         ul1 = driver.find_elements_by_css_selector("ul.nitro-offscreen")[0]
         lis = ul1.find_elements_by_css_selector("li > strong")
-        print(lis)
+        print(lis[0].tag_name)
         data["Start date"] = str(lis[0].text).split(":")[1].strip()
         data["Total Airdrop Amount"] = str(lis[1].text).split(":")[1].strip()
         data["Number of Winners"] = str(lis[2].text).split(":")[1].strip()
