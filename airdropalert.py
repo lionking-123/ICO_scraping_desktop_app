@@ -1,18 +1,22 @@
-import os
-import time
+import gc
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def airdropalert():
     src = 'https://airdropalert.com/new-airdrops?page='
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
-    driver = webdriver.Chrome("./UI/chromedriver", options=option)
-    wait = WebDriverWait(driver, 5)
+    capa = DesiredCapabilities.CHROME
+    capa["pageLoadStrategy"] = "none"
+
+    driver = webdriver.Chrome(
+        "./UI/chromedriver", options=option, desired_capabilities=capa)
+    wait = WebDriverWait(driver, 9)
 
     urls = []
     for i in range(1, 15):
@@ -37,7 +41,9 @@ def airdropalert():
                 break
             count = count + 1
 
-            driver = webdriver.Chrome("./UI/chromedriver", options=option)
+            driver = webdriver.Chrome(
+                "./UI/chromedriver", options=option, desired_capabilities=capa)
+            wait = WebDriverWait(driver, 9)
             driver.get(url)
             wait.until(EC.presence_of_element_located(
                 (By.CSS_SELECTOR, 'h1.airdrop__title')))
@@ -126,3 +132,5 @@ def airdropalert():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/airdropalert.csv")
+
+    gc.collect()

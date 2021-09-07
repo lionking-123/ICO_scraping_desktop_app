@@ -1,9 +1,10 @@
-import os
-import time
+import gc
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def coinmarketcap():
@@ -12,12 +13,19 @@ def coinmarketcap():
            'https://coinmarketcap.com/airdrop/ended/']
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
-    driver = webdriver.Chrome("./UI/chromedriver", options=option)
+    capa = DesiredCapabilities.CHROME
+    capa["pageLoadStrategy"] = "none"
+
+    driver = webdriver.Chrome(
+        "./UI/chromedriver", options=option, desired_capabilities=capa)
+    wait = WebDriverWait(driver, 9)
 
     urls = []
     for i in range(3):
         driver.get(src[i])
-        time.sleep(1)
+        wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, 'table.cmc-table > tbody > tr > td > a')))
+        driver.execute_script("window.stop();")
 
         atags = driver.find_elements_by_css_selector(
             "table.cmc-table > tbody > tr > td > a")
@@ -35,9 +43,14 @@ def coinmarketcap():
                 break
             count = count + 1
 
-            driver = webdriver.Chrome("./UI/chromedriver", options=option)
+            driver = webdriver.Chrome(
+                "./UI/chromedriver", options=option, desired_capabilities=capa)
+            wait = WebDriverWait(driver, 9)
             driver.get(url)
-            time.sleep(1)
+            wait.until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'h2.h1')))
+            driver.execute_script("window.stop();")
+
             data = {}
 
             try:
@@ -114,3 +127,5 @@ def coinmarketcap():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/coinmarketcap.csv")
+
+    gc.collect()

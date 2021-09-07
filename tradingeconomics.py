@@ -1,19 +1,28 @@
-import os
 import gc
 import time
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def tradingeconomics():
     src = 'https://tradingeconomics.com/'
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
-    driver = webdriver.Chrome("./UI/chromedriver", options=option)
+    capa = DesiredCapabilities.CHROME
+    capa["pageLoadStrategy"] = "none"
+
+    driver = webdriver.Chrome(
+        "./UI/chromedriver", options=option, desired_capabilities=capa)
+    wait = WebDriverWait(driver, 9)
+
     driver.get(src)
-    time.sleep(3)
+    wait.until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'button.btn-default')))
+    driver.execute_script("window.stop();")
 
     while(True):
         try:

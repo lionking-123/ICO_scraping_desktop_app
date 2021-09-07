@@ -1,18 +1,23 @@
-import os
+import gc
 import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def airdrops():
     src = 'https://airdrops.io/hot/'
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
-    driver = webdriver.Chrome("./UI/chromedriver", options=option)
-    wait = WebDriverWait(driver, 5)
+    capa = DesiredCapabilities.CHROME
+    capa["pageLoadStrategy"] = "none"
+
+    driver = webdriver.Chrome(
+        "./UI/chromedriver", options=option, desired_capabilities=capa)
+    wait = WebDriverWait(driver, 9)
 
     driver.get(src)
     wait.until(EC.presence_of_element_located(
@@ -47,10 +52,12 @@ def airdrops():
                 break
             count = count + 1
 
-            driver = webdriver.Chrome("./UI/chromedriver", options=option)
+            driver = webdriver.Chrome(
+                "./UI/chromedriver", options=option, desired_capabilities=capa)
+            wait = WebDriverWait(driver, 9)
             driver.get(url)
             wait.until(EC.presence_of_element_located(
-                (By.CSS_SELECTOR, 'div.showmore > span')))
+                (By.CSS_SELECTOR, 'h1.entry-title')))
             driver.execute_script("window.stop();")
 
             data = {}
@@ -128,3 +135,5 @@ def airdrops():
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/airdrops.csv")
+
+    gc.collect()

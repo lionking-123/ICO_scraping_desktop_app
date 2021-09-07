@@ -1,19 +1,27 @@
-import os
 import gc
-import time
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def cryptorank():
     src = 'https://cryptorank.io/upcoming-ico'
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
-    driver = webdriver.Chrome("./UI/chromedriver", options=option)
+    capa = DesiredCapabilities.CHROME
+    capa["pageLoadStrategy"] = "none"
+
+    driver = webdriver.Chrome(
+        "./UI/chromedriver", options=option, desired_capabilities=capa)
+    wait = WebDriverWait(driver, 9)
+
     driver.get(src)
-    time.sleep(1)
+    wait.until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'table.table > tbody > tr > td:nth-child(1) > div > a')))
+    driver.execute_script("window.stop();")
 
     urls = []
     atags = driver.find_elements_by_css_selector(
@@ -32,9 +40,14 @@ def cryptorank():
             if(count > 3):
                 break
             count = count + 1
-            driver = webdriver.Chrome("./UI/chromedriver", options=option)
+            driver = webdriver.Chrome(
+                "./UI/chromedriver", options=option, desired_capabilities=capa)
+            wait = WebDriverWait(driver, 9)
             driver.get(url)
-            time.sleep(1)
+            wait.until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'h2[class*="CoinMainHeader"]')))
+            driver.execute_script("window.stop();")
+
             data = {}
             try:
                 ico_name = driver.find_element_by_css_selector(
