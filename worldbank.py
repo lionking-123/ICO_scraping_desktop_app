@@ -35,12 +35,8 @@ def worldbank():
     driver.quit()
     datas = {}
 
-    count = 1
     for url in urls:
         try:
-            if(count > 3):
-                break
-            count = count + 1
             driver = webdriver.Chrome(
                 "./UI/chromedriver", options=option, desired_capabilities=capa)
             wait = WebDriverWait(driver, 9)
@@ -67,10 +63,10 @@ def worldbank():
             for tr in trs:
                 head_text = tr.find("td", class_="header").text
                 divs = tr.find_all("div", class_="spacer2")
-                val_text = "1990:" + divs[0].text + " | 2000:" + \
-                    divs[1].text + " | 2010:" + \
-                    divs[2].text + " | 2020:" + divs[3].text
-                data[head_text] = val_text
+                data[str(head_text + "1990")] = divs[0].text
+                data[str(head_text + "2000")] = divs[1].text
+                data[str(head_text + "2010")] = divs[2].text
+                data[str(head_text + "2020")] = divs[3].text
 
             datas[location] = data
 

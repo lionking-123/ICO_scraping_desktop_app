@@ -41,12 +41,8 @@ def bravenewcoin():
     driver.quit()
     datas = {}
 
-    count = 1
     for url in urls:
         try:
-            if(count > 3):
-                break
-            count = count + 1
             driver = webdriver.Chrome(
                 "./UI/chromedriver", options=option, desired_capabilities=capa)
             wait = WebDriverWait(driver, 9)
