@@ -1,4 +1,5 @@
 import gc
+import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -28,6 +29,7 @@ def coinmarketcap():
             (By.CSS_SELECTOR, 'table.cmc-table > tbody > tr > td > a')))
         driver.execute_script("window.stop();")
 
+        time.sleep(3)
         atags = driver.find_elements_by_css_selector(
             "table.cmc-table > tbody > tr > td > a")
         for atag in atags:
@@ -125,3 +127,6 @@ def coinmarketcap():
     df.to_csv("./results/coinmarketcap.csv")
 
     gc.collect()
+
+
+coinmarketcap()
