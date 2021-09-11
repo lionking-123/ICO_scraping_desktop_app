@@ -1,4 +1,5 @@
 import gc
+import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,7 +9,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def cryptorank():
-    src = 'https://cryptorank.io/upcoming-ico'
+    src = ['https://cryptorank.io/upcoming-ico',
+           'https://cryptorank.io/active-ico']
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     capa = DesiredCapabilities.CHROME
@@ -17,19 +19,48 @@ def cryptorank():
     driver = webdriver.Chrome(
         "./UI/chromedriver", options=option, desired_capabilities=capa)
     wait = WebDriverWait(driver, 9)
+    urls = []
 
-    driver.get(src)
+    for i in range(2):
+        driver.get(src[i])
+        wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, 'table.table > tbody > tr > td:nth-child(1) > div > a')))
+        driver.execute_script("window.stop();")
+
+        atags = driver.find_elements_by_css_selector(
+            "table.table > tbody > tr > td:nth-child(1) > div > a")
+        for atag in atags:
+            tmp = atag.get_attribute("href")
+            if("undefined" not in tmp):
+                urls.append(tmp)
+
+    driver.get('https://cryptorank.io/ico')
     wait.until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'table.table > tbody > tr > td:nth-child(1) > div > a')))
     driver.execute_script("window.stop();")
 
-    urls = []
+    viewAllBtn = driver.find_element_by_css_selector(
+        "div.data-table__top-pagination > a:nth-child(3)")
+    viewAllBtn.click()
+    time.sleep(2)
+
+    while(True):
+        try:
+            showBtn = driver.find_element_by_css_selector(
+                "div.data-table__load-more > button")
+            showBtn.click()
+            time.sleep(1)
+        except:
+            break
+
     atags = driver.find_elements_by_css_selector(
         "table.table > tbody > tr > td:nth-child(1) > div > a")
     for atag in atags:
         tmp = atag.get_attribute("href")
         if("undefined" not in tmp):
             urls.append(tmp)
+
+    print(len(urls))
 
     driver.quit()
     datas = {}
@@ -124,10 +155,10 @@ def cryptorank():
                 pass
 
             datas[ico_name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/cryptorank.csv")

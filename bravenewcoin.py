@@ -101,10 +101,10 @@ def bravenewcoin():
                 pass
 
             datas[event_name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/bravenewcoin.csv")

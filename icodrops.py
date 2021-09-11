@@ -1,4 +1,5 @@
 import gc
+import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,29 +9,34 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def icodrops():
-    src = 'https://icodrops.com/'
+    src = ['https://icodrops.com/category/active-ico/',
+           'https://icodrops.com/category/upcoming-ico/',
+           'https://icodrops.com/category/ended-ico/']
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     capa = DesiredCapabilities.CHROME
     capa["pageLoadStrategy"] = "none"
 
-    driver = webdriver.Chrome(
-        "./UI/chromedriver", options=option, desired_capabilities=capa)
-    wait = WebDriverWait(driver, 9)
-
-    driver.get(src)
-    wait.until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'a#n_color')))
-    driver.execute_script("window.stop();")
-
     urls = []
-    atags = driver.find_elements_by_css_selector("a#n_color")
-    for atag in atags:
-        tmp = atag.get_attribute("href")
-        if("undefined" not in tmp):
-            urls.append(tmp)
+    for i in range(3):
+        driver = webdriver.Chrome("./UI/chromedriver", options=option)
+        wait = WebDriverWait(driver, 9)
+        driver.get(src[i])
+        wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, 'div.tabs__content.active a#ccc')))
+        driver.execute_script("window.stop();")
 
-    driver.quit()
+        atags = driver.find_elements_by_css_selector(
+            "div.tabs__content.active a#ccc")
+        for atag in atags:
+            tmp = atag.get_attribute("href")
+            if("undefined" not in tmp):
+                urls.append(tmp)
+
+        driver.quit()
+
+    print(len(urls))
+
     datas = {}
 
     for url in urls:
@@ -154,10 +160,10 @@ def icodrops():
                 pass
 
             datas[ico_name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/icodrops.csv")

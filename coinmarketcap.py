@@ -10,7 +10,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 def coinmarketcap():
     src = ['https://coinmarketcap.com/airdrop/ongoing/',
            'https://coinmarketcap.com/airdrop/upcoming/',
-           'https://coinmarketcap.com/airdrop/ended/']
+           'https://coinmarketcap.com/airdrop/ended/',
+           'https://coinmarketcap.com/airdrop/ended/?page=2']
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     capa = DesiredCapabilities.CHROME
@@ -21,7 +22,7 @@ def coinmarketcap():
     wait = WebDriverWait(driver, 9)
 
     urls = []
-    for i in range(3):
+    for i in range(4):
         driver.get(src[i])
         wait.until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, 'table.cmc-table > tbody > tr > td > a')))
@@ -115,10 +116,10 @@ def coinmarketcap():
                 pass
 
             datas[name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/coinmarketcap.csv")

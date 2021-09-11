@@ -1,4 +1,5 @@
 import gc
+import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -15,13 +16,25 @@ def icomarks():
     capa["pageLoadStrategy"] = "none"
 
     driver = webdriver.Chrome(
-        "./UI/chromedriver", options=option, desired_capabilities=capa)
+        "./UI/chromedriver", options=option)
     wait = WebDriverWait(driver, 9)
 
     driver.get(src)
-    wait.until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'a.icoListItem__title')))
-    driver.execute_script("window.stop();")
+    # wait.until(EC.presence_of_element_located(
+    #     (By.CSS_SELECTOR, 'a.show-more')))
+    # driver.execute_script("window.stop();")
+    time.sleep(5)
+
+    while(True):
+        try:
+            H = driver.execute_script('return document.body.scrollHeight;')
+            driver.execute_script("window.scrollTo({}, {});".format(0, H))
+            showBtn = driver.find_element_by_css_selector(
+                "a.show-more")
+            showBtn.click()
+            time.sleep(2)
+        except:
+            break
 
     urls = []
     atags = driver.find_elements_by_css_selector("a.icoListItem__title")
@@ -30,6 +43,7 @@ def icomarks():
         if("undefined" not in tmp):
             urls.append(tmp)
 
+    print(len(urls))
     driver.quit()
     datas = {}
 
@@ -99,10 +113,10 @@ def icomarks():
                 pass
 
             datas[ico_name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/icomarks.csv")

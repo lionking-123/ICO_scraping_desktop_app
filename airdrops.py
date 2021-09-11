@@ -9,7 +9,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def airdrops():
-    src = 'https://airdrops.io/hot/'
+    src = 'https://airdrops.io/latest/'
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     capa = DesiredCapabilities.CHROME
@@ -24,14 +24,14 @@ def airdrops():
         (By.CSS_SELECTOR, 'div.showmore > span')))
     driver.execute_script("window.stop();")
 
-    for i in range(10):
+    while(True):
         try:
             showBtn = driver.find_element_by_css_selector(
                 "div.showmore > span")
             showBtn.click()
             time.sleep(1)
         except:
-            pass
+            break
 
     urls = []
     divs = driver.find_elements_by_css_selector("article.airdrop-hover > div")
@@ -123,10 +123,10 @@ def airdrops():
                 pass
 
             datas[name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/airdrops.csv")

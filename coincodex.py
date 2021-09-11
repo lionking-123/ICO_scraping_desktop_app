@@ -1,4 +1,6 @@
 import gc
+import time
+import requests
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,23 +16,13 @@ def coincodex():
     capa = DesiredCapabilities.CHROME
     capa["pageLoadStrategy"] = "none"
 
-    driver = webdriver.Chrome(
-        "./UI/chromedriver", options=option, desired_capabilities=capa)
-    wait = WebDriverWait(driver, 9)
-
-    driver.get(src)
-    wait.until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'tr > td:nth-child(1) > a')))
-    driver.execute_script("window.stop();")
+    req = requests.get("https://coincodex.com/api/coincodexicos/get_icos_filter/?type=sto&ico_status=all&stages_status=all&search=&stage=all&platform=all&launchpad=all&offset=0&limit=1000&rating=0&hard_cap=0&bonus=0&for_sale=0&order_by=stage_start&order_direction=desc").json()
 
     urls = []
-    atags = driver.find_elements_by_css_selector("tr > td:nth-child(1) > a")
-    for atag in atags:
-        tmp = atag.get_attribute("href")
-        if("undefined" not in tmp):
-            urls.append(tmp)
+    tot = len(req)
+    for i in range(tot):
+        urls.append("https://coincodex.com/sto/" + req[i]["slug"] + "/")
 
-    driver.quit()
     datas = {}
 
     for url in urls:
@@ -100,10 +92,10 @@ def coincodex():
                 pass
 
             datas[ico_name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/cioncodex.csv")

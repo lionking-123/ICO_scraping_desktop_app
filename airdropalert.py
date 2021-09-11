@@ -120,10 +120,10 @@ def airdropalert():
                 pass
 
             datas[name] = data
-
-            driver.quit()
         except:
             pass
+
+        driver.quit()
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/airdropalert.csv")
