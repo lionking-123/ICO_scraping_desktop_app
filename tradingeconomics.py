@@ -17,7 +17,7 @@ def tradingeconomics():
 
     driver = webdriver.Chrome(
         "./UI/chromedriver", options=option, desired_capabilities=capa)
-    wait = WebDriverWait(driver, 9)
+    wait = WebDriverWait(driver, 20)
 
     driver.get(src)
     wait.until(EC.presence_of_element_located(
@@ -64,9 +64,10 @@ def tradingeconomics():
             data["Current Account"] = con9
             data["Population"] = con10
 
-            datas[cntry] = data
         except:
             pass
+
+        datas[cntry] = data
 
     df = pd.DataFrame(data=datas).T
     df.to_csv("./results/tradingeconomics.csv")

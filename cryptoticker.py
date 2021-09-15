@@ -12,7 +12,7 @@ def cryptoticker():
     # option.add_argument("--headless")
 
     driver = webdriver.Chrome("./UI/chromedriver", options=option)
-    wait = WebDriverWait(driver, 9)
+    wait = WebDriverWait(driver, 20)
 
     driver.get(src)
     wait.until(EC.presence_of_element_located(

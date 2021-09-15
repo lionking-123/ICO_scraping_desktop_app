@@ -17,7 +17,7 @@ def icomarks():
 
     driver = webdriver.Chrome(
         "./UI/chromedriver", options=option)
-    wait = WebDriverWait(driver, 9)
+    wait = WebDriverWait(driver, 20)
 
     driver.get(src)
     # wait.until(EC.presence_of_element_located(
@@ -51,7 +51,7 @@ def icomarks():
         try:
             driver = webdriver.Chrome(
                 "./UI/chromedriver", options=option, desired_capabilities=capa)
-            wait = WebDriverWait(driver, 9)
+            wait = WebDriverWait(driver, 20)
             driver.get(url)
             wait.until(EC.presence_of_element_located(
                 (By.CSS_SELECTOR, 'h1[itemprop = "name"]')))

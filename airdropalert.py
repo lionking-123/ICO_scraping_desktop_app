@@ -1,4 +1,5 @@
 import gc
+import time
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,12 +15,11 @@ def airdropalert():
     capa = DesiredCapabilities.CHROME
     capa["pageLoadStrategy"] = "none"
 
-    driver = webdriver.Chrome(
-        "./UI/chromedriver", options=option, desired_capabilities=capa)
-    wait = WebDriverWait(driver, 9)
-
     urls = []
     for i in range(1, 15):
+        driver = webdriver.Chrome(
+            "./UI/chromedriver", options=option, desired_capabilities=capa)
+        wait = WebDriverWait(driver, 20)
         driver.get(src + str(i))
         wait.until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, 'a.card-link-overlay')))
@@ -30,15 +30,16 @@ def airdropalert():
         for atag in atags:
             urls.append(atag.get_attribute("href"))
 
-    driver.quit()
+        driver.quit()
 
+    print(len(urls))
     datas = {}
 
     for url in urls:
         try:
             driver = webdriver.Chrome(
                 "./UI/chromedriver", options=option, desired_capabilities=capa)
-            wait = WebDriverWait(driver, 9)
+            wait = WebDriverWait(driver, 20)
             driver.get(url)
             wait.until(EC.presence_of_element_located(
                 (By.CSS_SELECTOR, 'h1.airdrop__title')))
