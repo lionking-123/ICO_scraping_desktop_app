@@ -9,7 +9,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def tradingeconomics():
-    src = 'https://tradingeconomics.com/'
+    src = 'https://tradingeconomics.com/matrix'
     option = webdriver.ChromeOptions()
     # option.add_argument("--headless")
     capa = DesiredCapabilities.CHROME
@@ -21,16 +21,8 @@ def tradingeconomics():
 
     driver.get(src)
     wait.until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'button.btn-default')))
+        (By.CSS_SELECTOR, "table[id*='ContentPlaceHolder']")))
     driver.execute_script("window.stop();")
-
-    while(True):
-        try:
-            btn = driver.find_element_by_css_selector("button.btn-default")
-            btn.click()
-            time.sleep(2)
-        except:
-            break
 
     datas = {}
     trs = driver.find_elements_by_css_selector(
